@@ -88,9 +88,55 @@ This app is for patients at Children's Hospitals, and people who have gone throu
 ### Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### User in the "find matches" view
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | userId      | String   | unique id for the user (their email address) (default field) |
+   | name        | Pointer to User| the user's name |
+   | profilePic         | File     | user's profile picture |
+   | userInfo       | String   | image caption by author |
+   | userStatus       | String   | indicates if this user is a current cancer patient or a cancer survivor |
+   | age | Number   | user's age |
+   | dateJoined     | DateTime | date when the user joined the app (default field) |
+   | matchStatus       | Boolean   | indicates if this user is someone who you have matched with |
+
+#### Post in the resources tab
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | postId      | String   | unique id for the user post (default field) |
+   | author        | Pointer to User| image author |
+   | image         | File     | image that user posts (optional) |
+   | caption       | String   | image caption by author |
+   | commentsCount | Number   | number of comments that has been posted to an image |
+   | createdAt     | DateTime | date when post is created (default field) |
+   | updatedAt     | DateTime | date when post is last updated (default field) |
+### Networking
+#### List of network requests by screen
+   - Resources feed screen
+      - (Read/GET) Query all posts filtered by a search category or search word
+         ```swift
+         let query = PFQuery(className:"Post")
+         query.whereKey(posts.getCaption.contains("searchword"))
+         query.order(byDescending: "createdAt")
+         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let error = error { 
+               print(error.localizedDescription)
+            } else if let posts = posts {
+               print("Successfully retrieved \(posts.count) posts.")
+           // Display relevant posts...
+            }
+         }
+         ```
+      - (Create/POST) Create a new comment on a post
+      - (Delete) Delete existing comment
+   - Create Post Screen
+      - (Create/POST) Create a new post object
+   - Profile Screen
+      - (Read/GET) Query logged in user object
+      - (Update/PUT) Update user profile image or information
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
