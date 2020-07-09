@@ -81,7 +81,7 @@ This app is for patients at Children's Hospitals, and people who have gone throu
 * Upload resources -> page to insert posts
 
 ## Wireframes
-
+<img src="IMG_2947.jpg" width=600>
 
 ### Digital Wireframes & Mockups
 
